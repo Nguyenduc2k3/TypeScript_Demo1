@@ -21,14 +21,24 @@ const AddProductPage = (props) => {
     }
     const onHandleSubmit = (e) => {
         e.preventDefault();
+        const name = document.forms["myForm"]["prdName"].value;
+        if (name == "") {
+            alert("Vui lòng không để trống tên sản phẩm");
+            return false
+        }
+        const price = document.forms["myForm"]["price"].value;
+        if (price == "") {
+            alert("Vui lòng không để trống giá sản phẩm");
+            return false
+        }
         props.onAdd(inputValue);
         navigate('/admin/products')
     }
     return ( 
         <div>
-            <form action="" onSubmit={onHandleSubmit}>
-                <input type="text" placeholder='Product Name' id='prdName' onChange={onHandleChange} name='name' />
-                <input type="number" onChange={onHandleChange} name='price' />
+            <form name='myForm' action="" onSubmit={onHandleSubmit}>
+                <input type="text" placeholder='Tên sản phẩm' id='prdName' onChange={onHandleChange} name='name' />
+                <input type="number" placeholder='Giá' onChange={onHandleChange} name='price' />
                 <button type='submit'>Add New</button>
             </form>
         </div>
