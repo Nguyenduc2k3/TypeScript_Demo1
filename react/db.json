@@ -29,11 +29,6 @@
       "name": "Product 10",
       "price": "5000",
       "id": 6
-    },
-    {
-      "price": "1",
-      "name": "Product 99",
-      "id": 7
     }
   ]
 }

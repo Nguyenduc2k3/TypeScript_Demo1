@@ -14,16 +14,11 @@ import UpdateProductPage from './pages/admin/UpdateProduct'
 function App() {
   const [products, setProducts] = useState([])
   useEffect(() => {
-    // fetch('http://localhost:3000/products')
-    //   .then(response => response.json())
-    //   .then(data => setProducts(data))
+   
     getAllProduct().then(({ data }) => setProducts(data))
   }, [])
   const onHandleRemove = (id) => {
-    // fetch('http://localhost:3000/products/' + id, {
-    //   method: 'DELETE'
-    // }).then(() => setProducts(products.filter((item) => item.id !== id)))
-    deleteProduct(id).then(() => setProducts(products.filter((item) => item.id !== id)))
+     deleteProduct(id).then(() => setProducts(products.filter((item) => item.id !== id)))
   }
   const onHandleAdd = (product) => {
     addProduct(product).then(() => setProducts([...products, product]))
