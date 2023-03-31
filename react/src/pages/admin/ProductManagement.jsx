@@ -21,6 +21,7 @@ const ProductManagementPage = (props) => {
                     <tr>
                         <th>STT</th>
                         <th>Product Name</th>
+                        <th>Price</th>
                         <th>Action</th>
                     </tr>
                 </thead>

@@ -30,6 +30,9 @@ const AddProductPage = (props) => {
         if (price == "") {
             alert("Vui lòng không để trống giá sản phẩm");
             return false
+        } else if (price <= 0 ) {
+            alert("Giá phải lớn hơn 0")
+            return false
         }
         props.onAdd(inputValue);
         navigate('/admin/products')
