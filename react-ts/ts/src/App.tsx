@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react'
 import reactLogo from './assets/react.svg'
 import viteLogo from '/vite.svg'
 import './App.css'
+// import './index.css'
 import { Route, Routes } from 'react-router-dom'
 import HomePage from './pages/HomePage'
 import ProductPage from './pages/Product'
@@ -12,6 +13,9 @@ import AddProductPage from './pages/admin/AddProduct'
 import Dashboard from './pages/admin/Dashboard'
 import UpdateProductPage from './pages/admin/UpdateProduct'
 import ProductManagementPage from './pages/admin/ProductManagement'
+import Register from './pages/admin/Register'
+import Login from './pages/admin/Login'
+
 
 
 function App() {
@@ -26,7 +30,7 @@ function App() {
     addProduct(product).then(() => setProduct([...products, product]))
   }
   const onHandleUpdate = (product) => {
-    updateProduct(product).then(() => setProduct([...products, product]))
+    updateProduct(product).then(() => setProduct(products.map((item) => item.id == product.id ? product : item)))
   }
   return (
     <div className="App">
@@ -39,6 +43,8 @@ function App() {
           </Route>
         </Route>
         <Route path='admin'>
+          <Route index path='login' element={<Login />}/>
+          <Route path='register' element={<Register />}/>
             <Route path='products'>
               <Route index element={<ProductManagementPage products={products} onRemove={onHandleRemove}/>}/>
               <Route path='add' element={<AddProductPage onAdd={onHandleAdd}/>}/>
