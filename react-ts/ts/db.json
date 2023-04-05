@@ -71,15 +71,5 @@
       "confirmPassword": "123456",
       "id": 4
     }
-  ],
-  "categories": [
-    {
-      "id":1,
-      "name":"Điện thoại"
-    },
-    {
-      "id":2,
-      "name":"Máy tính"
-    }
   ]
 }
