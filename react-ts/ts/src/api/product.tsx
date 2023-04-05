@@ -2,7 +2,9 @@ import instance from "./instance";
 interface IProduct {
     id: number,
     name: string,
-    price: number
+    price: number,
+    description: string,
+    categoryId: string | number,
 }
 const getAllProduct = () => {
     return instance.get("/products");

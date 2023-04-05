@@ -15,6 +15,7 @@ import UpdateProductPage from './pages/admin/UpdateProduct'
 import ProductManagementPage from './pages/admin/ProductManagement'
 import Register from './pages/admin/Register'
 import Login from './pages/admin/Login'
+import { getAllCate } from './api/category'
 
 
 
@@ -23,6 +24,19 @@ function App() {
   useEffect(() => {
     getAllProduct().then(({ data }) => setProduct(data))
   }, [])
+  const [categories, setCategories] = useState([]);
+  useEffect(() => {
+    (async () => {
+      try {
+        const { data } = await getAllCate();
+
+        setCategories(data.data);
+      } catch (error) {
+        console.log(error);
+      }
+    })();
+  }, []);
+  
   const onHandleRemove = (id: number) => {
     deleteProduct(id).then(() => setProduct(products.filter((item) => item.id !==id)))
   }
@@ -38,17 +52,17 @@ function App() {
         <Route path='/'>
           <Route index element={<HomePage />} />
           <Route path='products' >
-            <Route index element={<ProductPage products={products} onRemove={onHandleRemove} />} />
+            <Route index element={<ProductPage categories={categories} products={products} onRemove={onHandleRemove} />} />
             <Route path=':id' element={<ProductDetailPage />} />
           </Route>
         </Route>
         <Route path='admin'>
-          <Route index path='login' element={<Login />}/>
+          <Route index element={<Login />}/>
           <Route path='register' element={<Register />}/>
             <Route path='products'>
-              <Route index element={<ProductManagementPage products={products} onRemove={onHandleRemove}/>}/>
-              <Route path='add' element={<AddProductPage onAdd={onHandleAdd}/>}/>
-              <Route path=':id/update' element={<UpdateProductPage onUpdate={onHandleUpdate} products={products}/>}/>
+              <Route index element={<ProductManagementPage categories={categories} products={products} onRemove={onHandleRemove}/>}/>
+              <Route path='add' element={<AddProductPage categories={categories} onAdd={onHandleAdd}/>}/>
+              <Route path=':id/update' element={<UpdateProductPage categories={categories} onUpdate={onHandleUpdate} products={products}/>}/>
             </Route>
         </Route>
       </Routes>

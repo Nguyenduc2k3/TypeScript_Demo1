@@ -1,4 +1,4 @@
-import { Form, Input, Button } from 'antd';
+import { Form, Input, Button, message } from 'antd';
 import { UserOutlined, LockOutlined } from '@ant-design/icons';
 import { useNavigate } from 'react-router-dom';
 
@@ -21,10 +21,10 @@ const Login = () => {
 
     if (user) {
       localStorage.setItem('user', JSON.stringify(user));
-      alert("Đăng nhập thành công")
+      message.success('Đăng nhập thành công');
       navigate('/admin/products');
     } else {
-      alert('Invalid email or password');
+      message.error('Đăng nhập thất bại');
     }
   };
 

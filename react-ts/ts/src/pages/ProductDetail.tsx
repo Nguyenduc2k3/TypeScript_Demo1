@@ -23,7 +23,8 @@
 import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import { getOneProduct } from "../api/product";
-import { Card, Button } from "antd";
+import { SmileOutlined } from '@ant-design/icons';
+import { Card, Button, notification } from "antd";
 
 const { Meta } = Card;
 
@@ -39,6 +40,16 @@ const ProductDetailPage = () => {
         // Your buy logic here
         alert(`Buying product: ${product.name}`);
     };
+    const [api, contextHolder] = notification.useNotification();
+
+    const openNotification = () => {
+        api.open({
+        message: 'Thông báo',
+        description:
+            'Bạn đã mua hàng thành công',
+        icon: <SmileOutlined style={{ color: '#108ee9' }} />,
+        });
+    };
 
     return (
         <div style={{ padding: "20px" }}>
@@ -47,10 +58,11 @@ const ProductDetailPage = () => {
                 style={{ width: 500 }}
             >
                 <Meta title={product.name} description={product.description} />
-                <p style={{ fontSize: 18, fontWeight: "bold", marginTop: 16 }}>
+                <p style={{ color:"red", fontSize: 18, fontWeight: "bold", marginTop: 16 }}>
                     {`Price: $${product.price}`}
                 </p>
-                <Button type="primary" onClick={handleBuy}>
+                {contextHolder}
+                <Button type="primary" onClick={openNotification}>
                     Buy
                 </Button>
             </Card>

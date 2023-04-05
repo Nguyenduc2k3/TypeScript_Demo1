@@ -16,6 +16,7 @@ const Register = () => {
 
   return (
     <div>
+      <h1>Đăng ký tài khoản</h1>
     <Form
       name="register-form"
       onFinish={onFinish}
@@ -87,7 +88,7 @@ const Register = () => {
       </Form.Item>
     </Form>
     <div>
-    Already have an account? <Link to="/admin/login">Login here.</Link>
+    Already have an account? <Link to="/admin">Login here.</Link>
   </div>
   </div>
   );
