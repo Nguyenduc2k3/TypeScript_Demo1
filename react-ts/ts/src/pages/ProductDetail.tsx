@@ -36,10 +36,6 @@ const ProductDetailPage = () => {
         getOneProduct(Number(id)).then(({ data }) => setProduct(data));
     }, [id]);
 
-    const handleBuy = () => {
-        // Your buy logic here
-        alert(`Buying product: ${product.name}`);
-    };
     const [api, contextHolder] = notification.useNotification();
 
     const openNotification = () => {
@@ -71,4 +67,5 @@ const ProductDetailPage = () => {
 };
 
 export default ProductDetailPage;
+
 

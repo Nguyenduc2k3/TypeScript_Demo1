@@ -94,7 +94,7 @@ const { TextArea } = Input;
 type Props = {
   products: IProduct[];
   onUpdate: (props: Props) => void;
-  categories: any;
+  categories: { id: number; name: string }[];
 };
 
 const UpdateProductPage = ({ products, onUpdate, categories }: Props) => {
@@ -134,12 +134,12 @@ const UpdateProductPage = ({ products, onUpdate, categories }: Props) => {
   const onFinishFailed = (errorInfo: any) => {
     console.log("Failed:", errorInfo);
   };
-  const dataCate = categories.map((item: any) => {
+  const dataCate = categories ? categories.map((item: any) => {
     return {
       value: item.id,
       label: item.name,
     };
-  });
+  }) : [];
 
   return (
     <Form
@@ -178,7 +178,7 @@ const UpdateProductPage = ({ products, onUpdate, categories }: Props) => {
       >
         <Select
           showSearch
-          placeholder="Select a person"
+          placeholder="Select a category"
           optionFilterProp="children"
           filterOption={(input, option) =>
             (option?.label ?? "").toLowerCase().includes(input.toLowerCase())

@@ -73,7 +73,6 @@
 
 // export default AddProductPage
 
-
 import React from "react";
 import { useForm } from "react-hook-form";
 import { IProduct } from "../../types/product";
@@ -82,7 +81,7 @@ import { Button, Form, Input, Select } from "antd";
 const { TextArea } = Input;
 type Props = {
   onAdd: () => void;
-  categories: any;
+  categories: { id: number; name: string }[];
 };
 
 const AddProductPage = ({ onAdd, categories }: Props) => {
@@ -100,12 +99,12 @@ const AddProductPage = ({ onAdd, categories }: Props) => {
   const onFinishFailed = (errorInfo: any) => {
     console.log("Failed:", errorInfo);
   };
-  const data = categories.map((item: any) => {
+  const data = categories ? categories.map((item: any) => {
     return {
       value: item.id,
       label: item.name,
     };
-  });
+  }): [];
 
   return (
     <Form
@@ -134,8 +133,8 @@ const AddProductPage = ({ onAdd, categories }: Props) => {
         <Input />
       </Form.Item>
       <Form.Item label="Link ảnh" name="image" rules={[{ required: true }]}>
-         <Input placeholder="Link ảnh" />
-       </Form.Item>
+        <Input placeholder="Link ảnh" />
+      </Form.Item>
       <Form.Item
         label="Category Product"
         name="categoryId"
@@ -143,7 +142,7 @@ const AddProductPage = ({ onAdd, categories }: Props) => {
       >
         <Select
           showSearch
-          placeholder="Select a person"
+          placeholder="Select a category"
           optionFilterProp="children"
           filterOption={(input, option) =>
             (option?.label ?? "").toLowerCase().includes(input.toLowerCase())
@@ -154,7 +153,9 @@ const AddProductPage = ({ onAdd, categories }: Props) => {
       <Form.Item
         label="Description Product"
         name="description"
-        rules={[{ required: true, message: "Please input your description!" }]}
+        rules={[
+          { required: true, message: "Please input your description!" },
+        ]}
       >
         <TextArea rows={4} />
       </Form.Item>
@@ -169,3 +170,4 @@ const AddProductPage = ({ onAdd, categories }: Props) => {
 };
 
 export default AddProductPage;
+
